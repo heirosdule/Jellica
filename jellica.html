@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Special Someone ❤️</title>
+    <style>
+        :root {
+            --primary-color: #e2c0ff;
+            --secondary-color: #d8b4fe;
+            --accent-color: #c77dff;
+            --text-color: #4a1b6a;
+            --light-pink: #f8f0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #fff5fd;
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #8a2be2, #9932cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid var(--primary-color);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.2);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.1);
+            position: relative;
+            overflow: hidden;
+            flex-grow: 1;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, transparent 100%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .edit-btn {
+            display: none; /* Hide the edit button */
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Floating hearts animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Pulsing heart animation */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content-wrapper {
+                flex-direction: column;
+            }
+            .image-container, 
+            .message-box {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        /* Edit mode styles */
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            resize: none;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .save-btn {
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="pulse">Happy Girlfriend Day!</h1>
+            <p class="subtitle">My babyy, My enemy, My loml, and my everything</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="image-container">
+                <!-- Replace with your image -->
+                <img src="https://i.ibb.co/sJD06V3b/IMG-20250731-014012.jpg" alt="Beautiful portrait of my girlfriend smiling in natural light, wearing pastel colors, with soft bokeh background" />
+            </div>
+
+            <div class="message-box" id="messageBox">
+            <p class="message" id="message">Happy girlfriend day to the one who makes my world brighter every day, 
+            your smile is my favorite sight, your laugh my favorite sound, 
+            and your love my greatest blessing. On this special day, 
+            I want you to know that you're cherished beyond words. 
+            Happy Girlfriend Day to the most beautiful and incredible woman in my life!</p>
+        </div>
+    </div>
+
+    <footer>
+        Xyyigop
+    </footer>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartSymbols = ['❤️', '💜', '💕', '💖', '💗', '🌼'];
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.opacity = Math.random() * 0.5 + 0.5;
+            const pastelColors = ['#ffb6e6', '#d4b8ff', '#ffb8d9', '#c8a2ff', '#e8b5ff'];
+            heart.style.color = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+            
+            document.body.appendChild(heart);
+            
+            // Animation
+            const animationDuration = Math.random() * 5 + 5;
+            heart.style.animation = float ${animationDuration}s linear forwards;
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, animationDuration * 1000);
+        }
+
+        // Create initial hearts
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createHearts, i * 300);
+        }
+
+        // Continue creating hearts periodically
+        setInterval(createHearts, 1000);
+
+        /* Remove all message editing functionality */
+        const messageBox = document.getElementById('messageBox');
+        const message = document.getElementById('message');
+
+        editBtn.addEventListener('click', function() {
+            if (editBtn.textContent === 'Edit Message') {
+                const currentMessage = message.textContent;
+                messageBox.innerHTML = `
+                    <textarea id="newMessage">${currentMessage}</textarea>
+                    <button class="edit-btn save-btn" id="saveBtn">Save Message</button>
+                `;
+                
+                document.getElementById('saveBtn').addEventListener('click', saveMessage);
+            }
+        });
+
+        function saveMessage() {
+            const newMessage = document.getElementById('newMessage').value;
+            messageBox.innerHTML = `
+                <p class="message" id="message">${newMessage}</p>
+                <button class="edit-btn" id="editBtn">Edit Message</button>
+            `;
+            
+            // Reattach event listener to the new edit button
+            document.getElementById('editBtn').addEventListener('click', function() {
+                if (this.textContent === 'Edit Message') {
+                    const currentMessage = document.getElementById('message').textContent;
+                    messageBox.innerHTML = `
+                        <textarea id="newMessage">${currentMessage}</textarea>
+                        <button class="edit-btn save-btn" id="saveBtn">Save Message</button>
+                    `;
+                    
+                    document.getElementById('saveBtn').addEventListener('click', saveMessage);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
