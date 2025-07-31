@@ -6,7 +6,7 @@ function createHearts() {
     heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
     heart.style.left = Math.random() * 100 + 'vw';
     heart.style.top = Math.random() * 100 + 'vh';
-    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    heart.style.fontSize = (Math.random() * 40 + 30) + 'px';
     heart.style.opacity = Math.random() * 0.5 + 0.5;
     const pastelColors = ['#ffb6e6', '#d4b8ff', '#ffb8d9', '#c8a2ff', '#e8b5ff'];
     heart.style.color = pastelColors[Math.floor(Math.random() * pastelColors.length)];
